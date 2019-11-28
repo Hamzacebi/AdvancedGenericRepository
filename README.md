@@ -81,7 +81,9 @@ Generic Repository'in temelinde yatan her tablo Base olarak belirlenmiş olan t�
 		}
 	}
 
-Görüldüğü üzere yukarıda IRepositoryBase<T> generic interfacesi ve RepositoryBase<T> class'ı generic liği ifade etmek isteyen T type için gelecek tüm Context sınıfı (DatabaseContext) içinde ki tablolara denk gelen classlar için burada yazılmış olan tüm fonksiyonlara erişme hakkına sahip olacaklardır. Bu örnek için DatabaseContext sınıfımız;
+Görüldüğü üzere yukarıda IRepositoryBase<T> generic interfacesi ve RepositoryBase<T> class'ı generic liği ifade etmek isteyen T type için gelecek tüm Context sınıfı (DatabaseContext) içinde ki tablolara denk gelen classlar için burada yazılmış olan tüm fonksiyonlara erişme hakkına sahip olacaklardır. Bu örnek için 
+	
+###	DatabaseContext sınıfımız;
 
 
 	public class DatabaseContext : DbContext
@@ -121,7 +123,7 @@ Görüldüğü üzere yukarıda IRepositoryBase<T> generic interfacesi ve Reposi
 		}
 	}
 
-Tablolar;
+### Tablolar;
 
 	public partial class User
     {
@@ -158,7 +160,7 @@ Tablolar;
 
 .Net Core Console projesi içerisinde olan;
 
-	Instance yöntemi ->
+####	Instance yöntemi ->
 
 	class Program 
 	{
@@ -193,7 +195,7 @@ Tablolar;
 Görüleceği üzere, RepositoryBase<T> den DatabaseContext içerisinde tanımlanmış olan DbSet<TableName> e göre yani Database'imiz içinde olan Tablolarımıza özel bir instance ürettiğimizde, o tablonun Insert, Update veya Delete fonksiyonlarına ihtiyaç olup olmamasına bakılmaksızın direkt olarak intellisense de IRepositoryBase'de tanımlanmış olan ve RepositoryBase'e implementation edilmiş olan tüm fonksiyonlar görülmektedir ve kullanıma açık durumdadır.
 
 
-		Miras alan Repository class'ları yöntemi ->
+####	Miras alan Repository class'ları yöntemi ->
 
 		public interface IRepositoryUser : IRepositoryBase<User>
 		{
@@ -228,7 +230,7 @@ Görüleceği üzere, RepositoryBase<T> den DatabaseContext içerisinde tanımla
 .Net Core Console projesi içerisinde olan;
 
 
-		Özel Repository class'ı yöntemi ->
+#### 	Özel Repository class'ı yöntemi ->
 
 		class Program
 		{
@@ -273,8 +275,8 @@ Yine görüleceği üzere _UserRepository veya _ProductRepository üzerinden bir
 Bu sorunları çözmek için en hızlı iki türlü çözüm olarak yaklaşım sergileyebiliriz. Daha fazla çözümü belki de bu çözdümden daha iyi bir çözümü siz uygulayabilirsiniz. Bu durumda lütfen projemi fork layarak kendi geliştirmenizi yapıp pull request talebi açınız :-)
 
 
-		İlk çözüm ->
-		------------
+###	İlk çözüm ->
+
 			Tabloların ihtiyaçları olabilecek olduğu tüm CRUD fonksiyonlarının kombinasyonu olan 4! tane class oluşturmak. Yani;
 
 		RepositorySelectInsertUpdateDelete<T>, 
@@ -285,8 +287,8 @@ Bu sorunları çözmek için en hızlı iki türlü çözüm olarak yaklaşım s
 şeklinde görüldüğü üzere bu durum uzayıp gidiyor. Bu durumda sizin de tahmin edeceğiniz gibi bu class'ların ve Interface'lerin yönetimi aşırı zor ve kalabalık olacaktır. Bu çözüm bence mantıksız bir çözümdür.
 
 
-		İkinci çözüm ->
-		---------------
+###	İkinci çözüm ->
+
 
 		Tabloların ihtiyaçları olabilecek olan tüm CRUD fonksiyonlarının parçalanmış halde ki interfacelerinin yazılması. Yani;
 
