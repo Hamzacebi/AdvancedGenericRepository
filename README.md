@@ -1,4 +1,6 @@
 
+	NOT : Lütfen projeyi ilk açtýðýnýzda Package Manager üzerinden "dotnet restore" komutunu çalýþtýrýn
+
 	Bu projede, Generic Repository Design Patternde olan bir sorunsalý ve Service Oriented Architecture yaklaþýmý, best practice yazýmý göstermek amaçlanmýþtýr.
 
 	Bilindiði üzere Generic Repository, kendisine verilen herhangi bir DatabaseContext class'i içerisinde bulunan tüm DbSet'ler yani Database içindeki tüm tablolar
