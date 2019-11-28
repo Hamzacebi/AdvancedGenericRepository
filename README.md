@@ -1,11 +1,9 @@
 
 	NOT : Lütfen projeyi ilk açtýðýnýzda Package Manager üzerinden "dotnet restore" komutunu çalýþtýrýn
 
-	Bu projede, Generic Repository Design Patternde olan bir sorunsalý ve Service Oriented Architecture yaklaþýmý, best practice yazýmý göstermek amaçlanmýþtýr.
+Bu projede, Generic Repository Design Patternde olan bir sorunsalý ve Service Oriented Architecture yaklaþýmý, best practice yazýmý göstermek amaçlanmýþtýr.
 
-	Bilindiði üzere Generic Repository, kendisine verilen herhangi bir DatabaseContext class'i içerisinde bulunan tüm DbSet'ler yani Database içindeki tüm tablolar
-için bir sefer yazýlmýþ olan ve  "BASE" olarak tanýmlanmýþ - belirlenmiþ olan CRUD (Create - Read - Update - Delete) fonksiyonlarýna ulaþmaya imkân saðlayan, 
-bunlarý virtual olarak tanýmlanmýþsa ihtiyaçlar doðrultusunda Database içinde ki herhangi bir tablo için override ederek özelleþtirebileceðimiz bir örüntü - yaklaþým biçimidir.
+Bilindiði üzere Generic Repository, kendisine verilen herhangi bir DatabaseContext class'i içerisinde bulunan tüm DbSet'ler yani Database içindeki tüm tablolar için bir sefer yazýlmýþ olan ve  "BASE" olarak tanýmlanmýþ - belirlenmiþ olan CRUD (Create - Read - Update - Delete) fonksiyonlarýna ulaþmaya imkân saðlayan, bunlarý virtual olarak tanýmlanmýþsa ihtiyaçlar doðrultusunda Database içinde ki herhangi bir tablo için override ederek özelleþtirebileceðimiz bir örüntü - yaklaþým biçimidir.
 
 	Generic Repository Design Pattern'de ki sorun :
 		Generic Repository'in temelinde yatan her tablo Base olarak belirlenmiþ olan tüm fonksiyonlara ulaþabilir durumunu barýndýrmaktadýr fakat, bazý tablolar 
