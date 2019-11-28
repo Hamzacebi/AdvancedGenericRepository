@@ -1,5 +1,5 @@
 
-	NOT : Lütfen projeyi ilk açtýðýnýzda Package Manager üzerinden "dotnet restore" komutunu çalýþtýrýn
+	#NOT : Lütfen projeyi ilk açtýðýnýzda Package Manager üzerinden "dotnet restore" komutunu çalýþtýrýn
 
 Bu projede, Generic Repository Design Patternde olan bir sorunsalý ve Service Oriented Architecture yaklaþýmý, best practice yazýmý göstermek amaçlanmýþtýr.
 
