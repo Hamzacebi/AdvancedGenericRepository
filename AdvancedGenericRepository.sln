@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{CB3B48EB-D3BF-4400-ABF5-3EBC1D0CD880}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{1CDCEC72-02E7-4ABE-B403-BCDBD0BE40CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{95C7A847-C12E-4106-9913-AFFA7F55B942}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Abstracts", "Abstracts", "{33B2E4D9-CA8A-4A34-8C36-FA6B18FCC1CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Concretes", "Concretes", "{1E14C9C9-8836-420D-B336-D49EABBCFC0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseModels", "DatabaseModels", "{3EB2B03D-24B4-4FC9-BC28-6F9294A719E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OutherModels", "OutherModels", "{AD0B9CFF-6629-494B-BCB4-1BA461CD07E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Abstracts.Interfaces", "DataAccess.Abstracts.Interfaces\DataAccess.Abstracts.Interfaces.csproj", "{8B23F83F-67F3-4D59-B00C-29580D2B40E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Abstracts.Concretes", "DataAccess.Abstracts.Concretes\DataAccess.Abstracts.Concretes.csproj", "{581A0E4C-65C3-41F2-9EEE-387C27518037}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DB682E6-67D6-4DC2-BF38-38D3C60C694D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B23F83F-67F3-4D59-B00C-29580D2B40E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B23F83F-67F3-4D59-B00C-29580D2B40E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B23F83F-67F3-4D59-B00C-29580D2B40E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B23F83F-67F3-4D59-B00C-29580D2B40E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581A0E4C-65C3-41F2-9EEE-387C27518037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581A0E4C-65C3-41F2-9EEE-387C27518037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581A0E4C-65C3-41F2-9EEE-387C27518037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581A0E4C-65C3-41F2-9EEE-387C27518037}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33B2E4D9-CA8A-4A34-8C36-FA6B18FCC1CA} = {CB3B48EB-D3BF-4400-ABF5-3EBC1D0CD880}
+		{1E14C9C9-8836-420D-B336-D49EABBCFC0F} = {CB3B48EB-D3BF-4400-ABF5-3EBC1D0CD880}
+		{3EB2B03D-24B4-4FC9-BC28-6F9294A719E8} = {1CDCEC72-02E7-4ABE-B403-BCDBD0BE40CC}
+		{AD0B9CFF-6629-494B-BCB4-1BA461CD07E8} = {1CDCEC72-02E7-4ABE-B403-BCDBD0BE40CC}
+		{8B23F83F-67F3-4D59-B00C-29580D2B40E2} = {33B2E4D9-CA8A-4A34-8C36-FA6B18FCC1CA}
+		{581A0E4C-65C3-41F2-9EEE-387C27518037} = {1E14C9C9-8836-420D-B336-D49EABBCFC0F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA6B7202-EE7C-46D2-BA76-40A86C2A0198}
+	EndGlobalSection
+EndGlobal
