@@ -6,12 +6,12 @@ Bu projede, Generic Repository Design Patternde olan bir sorunsalý ve Service Or
 Bilindiði üzere Generic Repository, kendisine verilen herhangi bir DatabaseContext class'i içerisinde bulunan tüm DbSet'ler yani Database içindeki tüm tablolar için bir sefer yazýlmýþ olan ve  "BASE" olarak tanýmlanmýþ - belirlenmiþ olan CRUD (Create - Read - Update - Delete) fonksiyonlarýna ulaþmaya imkân saðlayan, bunlarý virtual olarak tanýmlanmýþsa ihtiyaçlar doðrultusunda Database içinde ki herhangi bir tablo için override ederek özelleþtirebileceðimiz bir örüntü - yaklaþým biçimidir.
 
 	Generic Repository Design Pattern'de ki sorun :
-		Generic Repository'in temelinde yatan her tablo Base olarak belirlenmiþ olan tüm fonksiyonlara ulaþabilir durumunu barýndýrmaktadýr fakat, bazý tablolar 
-sadece Insert fonksiyonlarýna sahip olmasý gerekirken, Base olarak belirlenmiþ olan class'tan miras aldýðý için ihtiyacý olmasa bile Update ve Delete 
-fonksiyonlarýna da otomatik olarak sahip olmuþ olacaktýr. Yani;
+		
+Generic Repository'in temelinde yatan her tablo Base olarak belirlenmiþ olan tüm fonksiyonlara ulaþabilir durumunu barýndýrmaktadýr fakat, bazý tablolar sadece Insert fonksiyonlarýna sahip olmasý gerekirken, Base olarak belirlenmiþ olan class'tan miras aldýðý için ihtiyacý olmasa bile Update ve Delete fonksiyonlarýna da otomatik olarak sahip olmuþ olacaktýr. Yani;
 
-	NOT : Kodlar .Net Core EntityFrameworkCore'a göre yazýlmýþtýr.
-	NOT : Fonksiyonlar temsili olarak yazilmistir. Tam anlamiyla calismayabilir.
+		NOT : Kodlar .Net Core EntityFrameworkCore'a göre yazýlmýþtýr.
+		NOT : Fonksiyonlar temsili olarak yazilmistir. Tam anlamiyla calismayabilir.
+
 
 
 	public interface IRepositoryBase<T> where T : class
@@ -81,9 +81,8 @@ fonksiyonlarýna da otomatik olarak sahip olmuþ olacaktýr. Yani;
 		}
 	}
 
-	Görüldüðü üzere yukarýda IRepositoryBase<T> generic interfacesi ve RepositoryBase<T> class'ý generic liði ifade etmek isteyen T type için gelecek 
-tüm Context sýnýfý (DatabaseContext) içinde ki tablolara denk gelen classlar için burada yazýlmýþ olan tüm fonksiyonlara eriþme hakkýna sahip olacaklardýr.
-Bu örnek için DatabaseContext sýnýfýmýz;
+Görüldüðü üzere yukarýda IRepositoryBase<T> generic interfacesi ve RepositoryBase<T> class'ý generic liði ifade etmek isteyen T type için gelecek tüm Context sýnýfý (DatabaseContext) içinde ki tablolara denk gelen classlar için burada yazýlmýþ olan tüm fonksiyonlara eriþme hakkýna sahip olacaklardýr. Bu örnek için DatabaseContext sýnýfýmýz;
+
 
 	public class DatabaseContext : DbContext
 	{
@@ -122,7 +121,7 @@ Bu örnek için DatabaseContext sýnýfýmýz;
 		}
 	}
 
-	Tablolar;
+Tablolar;
 
 	public partial class User
     {
@@ -155,14 +154,11 @@ Bu örnek için DatabaseContext sýnýfýmýz;
 		public Nullable<DateTime> DeleteDate {get; set;}
 	}
 
-	þeklindedir. Görüldüðü üzere DatabaseContext sýnýfýmýz içerisinde User ve Product adýnda olan iki tane tablomuz var. IRepositoryBase<T> içerisinde
-signature olarak tanýmlanmýþ olan ve RepositoryBase<T> class' içerisinde implementation larý yapýlan bu fonksiyonlar, RepositoryBase<T> class'ý ve 
-IRepositoryBase<T> interfacesi'nden miras alacak olan tablolarýn kendilerine ait Repository class'larýnýn üzerinden veya direkt olarak RepositoryBase<T>'den 
-instance üreterek <T> yerine gelen classlar için, o class'ýn bu tüm fonksiyonlara ihtiyacý olup olmamasýna bakýlmadan direkt olarak kullanma imkânýna sahip olacaktýr. Yani;
+þeklindedir. Görüldüðü üzere DatabaseContext sýnýfýmýz içerisinde User ve Product adýnda olan iki tane tablomuz var. IRepositoryBase<T> içerisinde signature olarak tanýmlanmýþ olan ve RepositoryBase<T> class' içerisinde implementation larý yapýlan bu fonksiyonlar, RepositoryBase<T> class'ý ve IRepositoryBase<T> interfacesi'nden miras alacak olan tablolarýn kendilerine ait Repository class'larýnýn üzerinden veya direkt olarak RepositoryBase<T>'den instance üreterek <T> yerine gelen classlar için, o class'ýn bu tüm fonksiyonlara ihtiyacý olup olmamasýna bakýlmadan direkt olarak kullanma imkânýna sahip olacaktýr. Yani;
 
-	.Net Core Console projesi içerisinde olan;
+.Net Core Console projesi içerisinde olan;
 
-		Instance yöntemi ->
+	Instance yöntemi ->
 
 	class Program 
 	{
@@ -194,10 +190,8 @@ instance üreterek <T> yerine gelen classlar için, o class'ýn bu tüm fonksiyonlar
 		}
 	}
 
-		Görüleceði üzere, RepositoryBase<T> den DatabaseContext içerisinde tanýmlanmýþ olan DbSet<TableName> e göre yani Database'imiz içinde olan 
-Tablolarýmýza özel bir instance ürettiðimizde, o tablonun Insert, Update veya Delete fonksiyonlarýna ihtiyaç olup olmamasýna bakýlmaksýzýn direkt 
-olarak intellisense de IRepositoryBase'de tanýmlanmýþ olan ve RepositoryBase'e implementation edilmiþ olan tüm fonksiyonlar görülmektedir ve 
-kullanýma açýk durumdadýr.
+Görüleceði üzere, RepositoryBase<T> den DatabaseContext içerisinde tanýmlanmýþ olan DbSet<TableName> e göre yani Database'imiz içinde olan Tablolarýmýza özel bir instance ürettiðimizde, o tablonun Insert, Update veya Delete fonksiyonlarýna ihtiyaç olup olmamasýna bakýlmaksýzýn direkt olarak intellisense de IRepositoryBase'de tanýmlanmýþ olan ve RepositoryBase'e implementation edilmiþ olan tüm fonksiyonlar görülmektedir ve kullanýma açýk durumdadýr.
+
 
 		Miras alan Repository class'larý yöntemi ->
 
@@ -230,9 +224,11 @@ kullanýma açýk durumdadýr.
 			//Function implementations
 		}
 
-		.Net Core Console projesi içerisinde olan;
+		
+.Net Core Console projesi içerisinde olan;
 
-			Özel Repository class'ý yöntemi ->
+
+		Özel Repository class'ý yöntemi ->
 
 		class Program
 		{
@@ -265,24 +261,17 @@ kullanýma açýk durumdadýr.
 			}
 		}
 
-		Yine görüleceði üzere _UserRepository veya _ProductRepository üzerinden bir fonksiyona ulaþmak istediðimizde intellisense de
-IRepositoryBase içerisinde tanýmlanmýþ olan ve RepositoryBase içerisinde implementation edilmiþ olan tüm fonksiyonlara eksiksiz 
-ulaþmýþ oluyoruz. 
+Yine görüleceði üzere _UserRepository veya _ProductRepository üzerinden bir fonksiyona ulaþmak istediðimizde intellisense de IRepositoryBase içerisinde tanýmlanmýþ olan ve RepositoryBase içerisinde implementation edilmiþ olan tüm fonksiyonlara eksiksiz ulaþmýþ oluyoruz. 
+
 	
-		NOT : Dikkat edilecek olursa eðer, RepositoryUser veya RepositoryProduct interface'leri IRepositoryBase'den miras almasa bile
-RepositoryUser ve RepositoryProduct class'larý RepositoryBase'den miras aldýklarý için IRepositoryBase içinde ki fonksiyonlara ulaþabilme
-özgürlüðüne sahip olacaktýr. Bu durumda Service Oriented Architecture - Interface Segeration mantýðýna uygun olmayan bir durum oluþacaktýr. Interface'lerin
-oluþturulmasý ve fonksiyonlarýn signature tanýmlamalarýnýn interfacelerde yapýlmasýnýn amacý, class'lar kendi baþlarýna hiçbir iþe yaramaz ve 
-interface'ye baðýmlýdýr. Interfaceler üzerinde yetenek olarak tanýmlanmamýþ olan hiçbir iþi yapamaz ve dýþarýya açamaz (Class'larin içinde
-özel olarak yazýlmýþ olan private fonksiyonlar bunlara dahil deðildir!) anlamýna gelmektedir. 
+		NOT : Dikkat edilecek olursa eðer, RepositoryUser veya RepositoryProduct interface'leri IRepositoryBase'den miras almasa bile RepositoryUser ve RepositoryProduct class'larý RepositoryBase'den miras aldýklarý için IRepositoryBase içinde ki fonksiyonlara ulaþabilme özgürlüðüne sahip olacaktýr. Bu durumda Service Oriented Architecture - Interface Segeration mantýðýna uygun olmayan bir durum oluþacaktýr. Interface'lerin oluþturulmasý ve fonksiyonlarýn signature tanýmlamalarýnýn interfacelerde yapýlmasýnýn amacý, class'lar kendi baþlarýna hiçbir iþe yaramaz ve interface'ye baðýmlýdýr. Interfaceler üzerinde yetenek olarak tanýmlanmamýþ olan hiçbir iþi yapamaz ve dýþarýya açamaz (Class'larin içinde özel olarak yazýlmýþ olan private fonksiyonlar bunlara dahil deðildir!) anlamýna gelmektedir. 
+
 	
-		Þimdi bizim yapacak olduðumuz tüm geliþtirmeler ve yazýmlarýn hepsi, Service Oriented Architecture ve ihtiyacýn olaný kullan yani
-Interface Segeration mantýðýna uygun hale getirmek içindir. Hiçbir tablo, RepositoryBase içerisinde yazýlmýþ olan ve ihtiyacý olmayan
-fonksiyona ulaþamaz mantýðý ile çalýþmayý saðlamaktýr.
+Þimdi bizim yapacak olduðumuz tüm geliþtirmeler ve yazýmlarýn hepsi, Service Oriented Architecture ve ihtiyacýn olaný kullan yani Interface Segeration mantýðýna uygun hale getirmek içindir. Hiçbir tablo, RepositoryBase içerisinde yazýlmýþ olan ve ihtiyacý olmayan fonksiyona ulaþamaz mantýðý ile çalýþmayý saðlamaktýr.
 
 
-		Bu sorunlarý çözmek için en hýzlý iki türlü çözüm olarak yaklaþým sergileyebiliriz. Daha fazla çözümü belki de bu çözdümden daha
-iyi bir çözümü siz uygulayabilirsiniz. Bu durumda lütfen projemi fork layarak kendi geliþtirmenizi yapýp pull request talebi açýnýz :-)
+Bu sorunlarý çözmek için en hýzlý iki türlü çözüm olarak yaklaþým sergileyebiliriz. Daha fazla çözümü belki de bu çözdümden daha iyi bir çözümü siz uygulayabilirsiniz. Bu durumda lütfen projemi fork layarak kendi geliþtirmenizi yapýp pull request talebi açýnýz :-)
+
 
 		Ýlk çözüm ->
 		------------
@@ -293,13 +282,13 @@ iyi bir çözümü siz uygulayabilirsiniz. Bu durumda lütfen projemi fork layarak ke
 		RepositorySelectAndInsert<T>, RepositorySelectAndUpdate<T>, RepositorySelectAndDelete<T>, 
 		RepositoryUpdateAndInsert<T>, RepositoryUpdateAndDelete<T>, RepositoryInsertAndDelete<T>, ....
 
-	þeklinde görüldüðü üzere bu durum uzayýp gidiyor. Bu durumda sizin de tahmin edeceðiniz gibi bu class'larýn ve Interface'lerin
-yönetimi aþýrý zor ve kalabalýk olacaktýr. Bu çözüm bence mantýksýz bir çözümdür.
+þeklinde görüldüðü üzere bu durum uzayýp gidiyor. Bu durumda sizin de tahmin edeceðiniz gibi bu class'larýn ve Interface'lerin yönetimi aþýrý zor ve kalabalýk olacaktýr. Bu çözüm bence mantýksýz bir çözümdür.
+
 
 		Ýkinci çözüm ->
 		---------------
 
-			Tablolarýn ihtiyaçlarý olabilecek olan tüm CRUD fonksiyonlarýnýn parçalanmýþ halde ki interfacelerinin yazýlmasý. Yani;
+		Tablolarýn ihtiyaçlarý olabilecek olan tüm CRUD fonksiyonlarýnýn parçalanmýþ halde ki interfacelerinin yazýlmasý. Yani;
 
 		IRepositorySelect<T>, IRepositoryInsert<T>, IRepositoryUpdate<T> ve IRepositoryDelete<T> þeklinde. Ýçleri þu þekil olmalýdýr:
 
@@ -327,13 +316,12 @@ yönetimi aþýrý zor ve kalabalýk olacaktýr. Bu çözüm bence mantýksýz bir çözümdür
 		}
 
 
-		C - R - U - D fonksiyonlarýmýz için temel ihtiyaçlara hizmet verebilecek tüm fonksiyonlarý içeren interfaceleri hazýrladýk.
-Þimdi bu interfacelerin bir yerde implementation edilmesi gerekiyor. Burada dikkat edilmesi gereken þey .Net C# bir class, 
-bir tane abstact veya class tan ve N (N = 999) tane interface'den miras alabilir. Bu yüzden biz bu 4 tane interface için 4 farklý
-class ta implementation yapmak yerine base yaklaþým olan tek bir class üzerinde implementation iþlemini yapacaðýz fakat tek bir 
-farklýlýkla bu implementationlarý gerçekleþtireceðiz. Yani;
+C - R - U - D fonksiyonlarýmýz için temel ihtiyaçlara hizmet verebilecek tüm fonksiyonlarý içeren interfaceleri hazýrladýk.Þimdi bu interfacelerin bir yerde implementation edilmesi gerekiyor. Burada dikkat edilmesi gereken þey .Net C# bir class, bir tane abstact veya class tan ve N (N = 999) tane interface'den miras alabilir. Bu yüzden biz bu 4 tane interface için 4 farklý class ta implementation yapmak yerine base yaklaþým olan tek bir class üzerinde implementation iþlemini yapacaðýz fakat tek bir farklýlýkla bu implementationlarý gerçekleþtireceðiz. Yani;
 
-	NOT : Yukarýda tanýmlanmýþ olan DatabaseContext ile devam edilecektir. User ve Product tablosu üzerinden örnekler gösterilecektir.
+	
+		NOT : Yukarýda tanýmlanmýþ olan DatabaseContext ile devam edilecektir. User ve Product tablosu üzerinden örnekler gösterilecektir.
+		
+		
 		
 		public class RepositoryBase<T> : IRepositorySelectable<T>, IRepositoryInsertable<T>, IRepositoryUpdatable<T>, IRepositoryDeletable<T>
 		where T : class 
@@ -396,13 +384,12 @@ farklýlýkla bu implementationlarý gerçekleþtireceðiz. Yani;
 			#endregion Delete Function
 		}
 
-		Dikkat edileceði üzere normalde public olan IRepositoryXXX<T> interfacelerimiz için implementation yaptýðýmýzda normalde tüm fonksiyonlarýn 
-access modifierleri public olmasý gerekirken burada Interface adý ile implementation yapýldýðý için herhangi bir access modifier veremiyoruz. Fakat
-bu fonksiyonlarýn hepsi public tir. Dikkat edilmesi gereken tek þey direkt olarak bu class'a ulaþmak istersek bu fonksiyonlara private miþ gibi 
-ulaþamayýz. Ýþte bu yöntem ile Service Oriented Architecture yaklaþýmýný tam anlamýyla uygulamýþ oluyourz.
-	
-		Þimdi Product ve User classlarýmýz için tekrar birer tane IRepositoryXXX interfacesi ve RepositoryXXX classý oluþturalým.
+Dikkat edileceði üzere normalde public olan IRepositoryXXX<T> interfacelerimiz için implementation yaptýðýmýzda normalde tüm fonksiyonlarýn access modifierleri public olmasý gerekirken burada Interface adý ile implementation yapýldýðý için herhangi bir access modifier veremiyoruz. Fakat bu fonksiyonlarýn hepsi public tir. Dikkat edilmesi gereken tek þey direkt olarak bu class'a ulaþmak istersek bu fonksiyonlara private miþ gibi ulaþamayýz. Ýþte bu yöntem ile Service Oriented Architecture yaklaþýmýný tam anlamýyla uygulamýþ oluyourz.
 
+
+Þimdi Product ve User classlarýmýz için tekrar birer tane IRepositoryXXX interfacesi ve RepositoryXXX classý oluþturalým.
+
+		
 		public interface IRepositoryUser : IRepositorySelectable<User>, IRepositoryInsertable<User>, IRepositoryUpdatable<User>
 		{
 		}
@@ -421,12 +408,11 @@ ulaþamayýz. Ýþte bu yöntem ile Service Oriented Architecture yaklaþýmýný tam anl
 		{
 		}
 
-	Görüldüðü üzere, normal - temel Generic Repository Design Pattern de olduðu gibi tablolara özel olan IRepositoryXXX ve RepositoryXXX classlarinda 
-herhangi bir deðiþikliðe gitmiyoruz. Dikkat ederseniz eðer normal - temel yaklaþýmdan tek farklý olarak girdiðimiz kýsým sadece ve sadece
-RepositoryBase<T> içinde yazdýðýmýz fonksiyonlarýn signature'lerine müdahale ettik. Haricinde þimdiye kadar deðiþtirdiðimiz hiçbir þey 
-olmadý. Þimdi bunlarý böyle yaptýk fakat nasýl kullanacaðýz veya þimdiye kadar yapmýþ olduðumuz kullanýmlardan farklý bize ne katacak derseniz;
+Görüldüðü üzere, normal - temel Generic Repository Design Pattern de olduðu gibi tablolara özel olan IRepositoryXXX ve RepositoryXXX classlarinda herhangi bir deðiþikliðe gitmiyoruz. Dikkat ederseniz eðer normal - temel yaklaþýmdan tek farklý olarak girdiðimiz kýsým sadece ve sadece RepositoryBase<T> içinde yazdýðýmýz fonksiyonlarýn signature'lerine müdahale ettik. Haricinde þimdiye kadar deðiþtirdiðimiz hiçbir þey olmadý. Þimdi bunlarý böyle yaptýk fakat nasýl kullanacaðýz veya þimdiye kadar yapmýþ olduðumuz kullanýmlardan farklý bize ne katacak derseniz;
 
-		.Net Core Console projesi içerisinde olan;
+
+.Net Core Console projesi içerisinde olan;
+
 
 		class Program
 		{
@@ -458,32 +444,28 @@ olmadý. Þimdi bunlarý böyle yaptýk fakat nasýl kullanacaðýz veya þimdiye kadar y
 			}
 		}
 
-		Görüleceði üzere, RepositoryBase<T> içerisinde IRepositoryDeletable<T> interfacesinden gelen DeleteItem fonksiyonu
-implementation edildiði halde ve bizim RepositoryUser class'ýmýz RepositoryBase<T>'den (T:User) miras aldýðý halde,
-RepositoryBase<T> içerisinde olan DeleteItem fonksiyonuna _UserRepository instancesinden ulaþamadýk fakat _ProductRepository
-instancesi üzerinden tüm fonksiyonlarýmýza ulaþabilmiþ olduk. 
-		Bunun nedeni nedir? dersek ->
+		
+Görüleceði üzere, RepositoryBase<T> içerisinde IRepositoryDeletable<T> interfacesinden gelen DeleteItem fonksiyonu implementation edildiði halde ve bizim RepositoryUser class'ýmýz RepositoryBase<T>'den (T:User) miras aldýðý halde, RepositoryBase<T> içerisinde olan DeleteItem fonksiyonuna _UserRepository instancesinden ulaþamadýk fakat _ProductRepository instancesi üzerinden tüm fonksiyonlarýmýza ulaþabilmiþ olduk. 
 
-			Dikkat edilecek olursa 
-				IRepositoryUser interfacesi IRepositorySelectable, IRepositoryInsertable ve IRepositoryUpdatable interfacelerinden
-	inherit edilmekteyken;
-				IRepositoryProduct interfacesi IRepositorySelectable, IRepositoryInsertable, IRepositoryUpdatable ve IRepositoryDeletable
-	interfacelerinden inherit edilmektedir. 
 
-	Bu da bize, IRepositoryUser üzerinden concrete edilmiþ olan RepositoryUser class'ýndan bir instance üretilince IRepositoryDeletable
-interfacesinde olan fonksiyonlara sahip olsa bile ulaþamama - eriþememe imkâný saðlamýþ olmaktadýr. Yani Encapsulation yaptýk diyebiliriz.
+Bunun nedeni nedir? dersek ->
 
-		NOT : RepositoryUser veya RepositoryProduct classlarýndan bir instance üretirken eðer bu instancelerin tiplerini direkt kendilerine
-eþitlersek RepositoryBase üzerinden gelen hiçbir fonksiyonu görme imkânýmýz olmayacaktýr. Service Oriented yaklaþýmý sayesinde gerekli
-Encapsulation iþlemini bu þekilde saðlamýþ oluyoruz. Yani class'ýn hizmet verebileceði tek þey, inherit edilmiþ olduðu IRepositoryUser
-veya IRepositoryProduct üzerinden gelecek olan fonksiyonlardýr.
+Dikkat edilecek olursa 
+
+		IRepositoryUser interfacesi IRepositorySelectable, IRepositoryInsertable ve IRepositoryUpdatable interfacelerinden inherit edilmekteyken;
+
+		IRepositoryProduct interfacesi IRepositorySelectable, IRepositoryInsertable, IRepositoryUpdatable ve IRepositoryDeletable interfacelerinden inherit edilmektedir. 
+
+Bu da bize, IRepositoryUser üzerinden concrete edilmiþ olan RepositoryUser class'ýndan bir instance üretilince IRepositoryDeletable interfacesinde olan fonksiyonlara sahip olsa bile ulaþamama - eriþememe imkâný saðlamýþ olmaktadýr. Yani Encapsulation yaptýk diyebiliriz.
+
+
+		NOT : RepositoryUser veya RepositoryProduct classlarýndan bir instance üretirken eðer bu instancelerin tiplerini direkt kendilerine eþitlersek RepositoryBase üzerinden gelen hiçbir fonksiyonu görme imkânýmýz olmayacaktýr. Service Oriented yaklaþýmý sayesinde gerekli Encapsulation iþlemini bu þekilde saðlamýþ oluyoruz. Yani class'ýn hizmet verebileceði tek þey, inherit edilmiþ olduðu IRepositoryUser veya IRepositoryProduct üzerinden gelecek olan fonksiyonlardýr.
 
             // RepositoryUser _RepositoryOfUser = new RepositoryUser(); -> Bu instance için hiçbir fonksiyona ulaþamayýz. Sadece
 			// RepositoryUser class'ý object olduðu için object üzerinden gelen temel fonksiyonlar gelir (GetType, Equals, ToString ve GetHashCode)
 
-		Tüm Repository ile alakalý olan instanceler, tablolarýn IRepositoryXXX þeklinde isme sahip interfaceler üzerinden yapýlmalýdýr.
+Tüm Repository ile alakalý olan instanceler, tablolarýn IRepositoryXXX þeklinde isme sahip interfaceler üzerinden yapýlmalýdýr.
 			
 
-	Artýk tam anlamýyla bir Service Oriented Architecture ve parçalanmýþ bir Generic Repository Design Pattern'in çok güzel
-bir haline ulaþmýþ olduk. 
+Artýk tam anlamýyla bir Service Oriented Architecture ve parçalanmýþ bir Generic Repository Design Pattern'in çok güzel bir haline ulaþmýþ olduk. 
 		
