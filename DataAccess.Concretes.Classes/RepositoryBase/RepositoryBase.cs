@@ -89,33 +89,21 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
 
         bool IRepositoryDeletable<T>.PermanentDelete(object id)
         {
-            bool result = default(bool);
 
-            T getRecord = this.DbSet.Find(keyValues: id);
-            if (getRecord != null)
-            {
-                var deletedRecord = this.DbSet.Attach(entity: getRecord);
-                deletedRecord.State = EntityState.Deleted;
-                result = this.DbContext.SaveChanges() > 0 ? true : false;
-            }
-            return result;
+            return Tools.TryCatch<bool>(function: () => {
+
+                bool result = default(bool);
+
+                T getRecord = this.DbSet.Find(keyValues: id);
+                if (getRecord != null)
+                {
+                    var deletedRecord = this.DbSet.Attach(entity: getRecord);
+                    deletedRecord.State = EntityState.Deleted;
+                    result = this.DbContext.SaveChanges() > 0 ? true : false;
+                }
+                return result;
+            });
         }
-
-        Func<bool> Hamsi(object id)
-        {
-            bool result = default(bool);
-
-            T getRecord = this.DbSet.Find(keyValues: id);
-            if (getRecord != null)
-            {
-                var deletedRecord = this.DbSet.Attach(entity: getRecord);
-                deletedRecord.State = EntityState.Deleted;
-                result = this.DbContext.SaveChanges() > 0 ? true : false;
-            }
-            //return result;
-            return null;
-        }
-
         #endregion Delete Functions
     }
 }
