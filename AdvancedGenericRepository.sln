@@ -21,16 +21,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Abstracts.Interf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DB682E6-67D6-4DC2-BF38-38D3C60C694D}"
 	ProjectSection(SolutionItems) = preProject
+		DatabaseScript.txt = DatabaseScript.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Test", "Test.Test\Test.Test.csproj", "{48B0C36F-A7F2-448B-8FEF-53B70BB49746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Test", "Test.Test\Test.Test.csproj", "{48B0C36F-A7F2-448B-8FEF-53B70BB49746}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{7209FB23-3AFD-4B70-B66C-61B52765C5B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Commons", "Common.Commons\Common.Commons.csproj", "{25B66858-CCDD-4EB1-B239-5DE5614F610E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Commons", "Common.Commons\Common.Commons.csproj", "{25B66858-CCDD-4EB1-B239-5DE5614F610E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Concretes.Classes", "DataAccess.Concretes.Classes\DataAccess.Concretes.Classes.csproj", "{02204925-FC33-46DD-BB9E-92C2822146EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Concretes.Classes", "DataAccess.Concretes.Classes\DataAccess.Concretes.Classes.csproj", "{02204925-FC33-46DD-BB9E-92C2822146EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.DatabaseModels", "Models.DatabaseModels\Models.DatabaseModels.csproj", "{F86A2FCA-35E9-4D98-A506-C952CF700CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +57,10 @@ Global
 		{02204925-FC33-46DD-BB9E-92C2822146EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02204925-FC33-46DD-BB9E-92C2822146EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02204925-FC33-46DD-BB9E-92C2822146EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86A2FCA-35E9-4D98-A506-C952CF700CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86A2FCA-35E9-4D98-A506-C952CF700CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86A2FCA-35E9-4D98-A506-C952CF700CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86A2FCA-35E9-4D98-A506-C952CF700CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +74,7 @@ Global
 		{48B0C36F-A7F2-448B-8FEF-53B70BB49746} = {95C7A847-C12E-4106-9913-AFFA7F55B942}
 		{25B66858-CCDD-4EB1-B239-5DE5614F610E} = {7209FB23-3AFD-4B70-B66C-61B52765C5B6}
 		{02204925-FC33-46DD-BB9E-92C2822146EA} = {1E14C9C9-8836-420D-B336-D49EABBCFC0F}
+		{F86A2FCA-35E9-4D98-A506-C952CF700CEE} = {3EB2B03D-24B4-4FC9-BC28-6F9294A719E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AA6B7202-EE7C-46D2-BA76-40A86C2A0198}
