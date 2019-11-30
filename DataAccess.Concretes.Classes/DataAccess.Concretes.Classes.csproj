@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="RepositoryEntities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
@@ -24,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common.Commons\Common.Commons.csproj" />
     <ProjectReference Include="..\DataAccess.Abstracts.Interfaces\DataAccess.Abstracts.Interfaces.csproj" />
+    <ProjectReference Include="..\Models.DatabaseModels\Models.DatabaseModels.csproj" />
   </ItemGroup>
 
 </Project>

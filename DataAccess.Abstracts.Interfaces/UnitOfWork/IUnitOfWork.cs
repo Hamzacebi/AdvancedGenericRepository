@@ -10,12 +10,25 @@ namespace DataAccess.Abstracts.Interfaces.UnitOfWork
     public interface IUnitOfWork
     {
         #region Access the Repositories
+
+        /// <summary>
+        /// Database islemleri icin yazilmis olan Base ve ozellikle User tablosu icin yazilmis olan fonksiyonlara erisim imkani saglayan property
+        /// </summary>
         IRepositoryUser RepositoryOfUser { get; }
 
+        /// <summary>
+        /// Database islemleri icin yazilmis olan Base ve ozellikle Category tablosu icin yazilmis olan fonksiyonlara erisim imkani saglayan property
+        /// </summary>
         IRepositoryCategory RepositoryOfCategory { get; }
 
+        /// <summary>
+        /// Database islemleri icin yazilmis olan Base ve ozellikle Product tablosu icin yazilmis olan fonksiyonlara erisim imkani saglayan property
+        /// </summary>
         IRepositoryProduct RepositoryOfProduct { get; }
 
+        /// <summary>
+        /// Database islemleri icin yazilmis olan Base ve ozellikle Order tablosu icin yazilmis olan fonksiyonlara erisim imkani saglayan property
+        /// </summary>
         IRepositoryOrder RepositoryOfOrder { get; }
         #endregion Access the Repositories
 
@@ -30,7 +43,11 @@ namespace DataAccess.Abstracts.Interfaces.UnitOfWork
         #endregion
 
         #region SaveChanges Function
-        //int SaveChanges();
+        /// <summary>
+        /// Database uzerinde yapilan Update - Delete ve Insert islemlerinin Database'e kayit edilmesini saglayan fonksiyon
+        /// </summary>
+        /// <returns></returns>
+        int SaveChanges();
         #endregion SaveChanges Function
 
     }

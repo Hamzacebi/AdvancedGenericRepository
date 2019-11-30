@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.Abstracts.Interfaces\DataAccess.Abstracts.Interfaces.csproj" />
+    <ProjectReference Include="..\DataAccess.Concretes.Classes\DataAccess.Concretes.Classes.csproj" />
+    <ProjectReference Include="..\Models.DatabaseModels\Models.DatabaseModels.csproj" />
   </ItemGroup>
 
 </Project>

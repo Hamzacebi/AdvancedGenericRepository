@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Models.DatabaseModels.DatabaseEntities
 {
-    public partial class Users
+    using EntityBase;
+
+    public partial class Users : IEntityBase, IBaseForCreation
     {
         public Users()
         {
@@ -16,6 +18,8 @@ namespace Models.DatabaseModels.DatabaseEntities
         public string Email { get; set; }
         public string Password { get; set; }
         public bool Status { get; set; }
+
+        public DateTime CreationDate { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
     }

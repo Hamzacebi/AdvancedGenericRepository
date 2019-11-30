@@ -43,6 +43,16 @@ namespace Models.DatabaseModels.DatabaseContext
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UpdateDate)
+                   .HasColumnType("datetime")
+                   .HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<Orders>(entity =>
@@ -86,6 +96,16 @@ namespace Models.DatabaseModels.DatabaseContext
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UpdateDate)
+                   .HasColumnType("datetime")
+                   .HasDefaultValueSql("(getdate())");
+
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
@@ -112,6 +132,12 @@ namespace Models.DatabaseModels.DatabaseContext
                 entity.Property(e => e.Surname)
                     .IsRequired()
                     .HasMaxLength(75);
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
             });
         }
     }

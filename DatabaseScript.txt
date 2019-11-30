@@ -1,9 +1,6 @@
-/*Sql Server 2012 ye gore uretilmistir*/
-
-
 USE [OrderDB]
 GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 30.11.2019 19:46:31 ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 1.12.2019 01:42:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,13 +9,15 @@ CREATE TABLE [dbo].[Categories](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[Status] [bit] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[UpdateDate] [datetime] NULL,
  CONSTRAINT [PK_Categories] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Orders]    Script Date: 30.11.2019 19:46:31 ******/
+/****** Object:  Table [dbo].[Orders]    Script Date: 1.12.2019 01:42:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -39,7 +38,7 @@ CREATE TABLE [dbo].[Orders](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Products]    Script Date: 30.11.2019 19:46:31 ******/
+/****** Object:  Table [dbo].[Products]    Script Date: 1.12.2019 01:42:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -50,13 +49,15 @@ CREATE TABLE [dbo].[Products](
 	[Name] [nvarchar](150) NOT NULL,
 	[Price] [decimal](18, 2) NOT NULL,
 	[Status] [bit] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
+	[UpdateDate] [datetime] NULL,
  CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 30.11.2019 19:46:31 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 1.12.2019 01:42:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,13 +69,18 @@ CREATE TABLE [dbo].[Users](
 	[Email] [nvarchar](100) NOT NULL,
 	[Password] [nvarchar](200) NOT NULL,
 	[Status] [bit] NOT NULL,
+	[CreationDate] [datetime] NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Categories] ADD  CONSTRAINT [DF_Categories_Status]  DEFAULT ((0)) FOR [Status]
+ALTER TABLE [dbo].[Categories] ADD  CONSTRAINT [DF_Categories_Status]  DEFAULT ((1)) FOR [Status]
+GO
+ALTER TABLE [dbo].[Categories] ADD  CONSTRAINT [DF_Categories_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Categories] ADD  CONSTRAINT [DF_Categories_UpdateDate]  DEFAULT (getdate()) FOR [UpdateDate]
 GO
 ALTER TABLE [dbo].[Orders] ADD  CONSTRAINT [DF_Orders_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
 GO
@@ -86,11 +92,17 @@ ALTER TABLE [dbo].[Orders] ADD  CONSTRAINT [DF_Orders_Status]  DEFAULT ((0)) FOR
 GO
 ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_Id]  DEFAULT (newid()) FOR [Id]
 GO
-ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_Status]  DEFAULT ((0)) FOR [Status]
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_Status]  DEFAULT ((1)) FOR [Status]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_UpdateDate]  DEFAULT (getdate()) FOR [UpdateDate]
 GO
 ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Id]  DEFAULT (newid()) FOR [Id]
 GO
-ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Status]  DEFAULT ((0)) FOR [Status]
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Status]  DEFAULT ((1)) FOR [Status]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
 GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Orders_Products] FOREIGN KEY([ProductId])
 REFERENCES [dbo].[Products] ([Id])

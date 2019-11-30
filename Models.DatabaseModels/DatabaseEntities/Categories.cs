@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Models.DatabaseModels.DatabaseEntities
 {
-    public partial class Categories
+    using EntityBase;
+
+    public partial class Categories : IEntityBase, IBaseForCreation, IBaseForUpdate
     {
         public Categories()
         {
@@ -13,6 +15,8 @@ namespace Models.DatabaseModels.DatabaseEntities
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Status { get; set; }
+        public DateTime CreationDate { get; set; }
+        public Nullable<DateTime> UpdateDate { get; set; }
 
         public virtual ICollection<Products> Products { get; set; }
     }

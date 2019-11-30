@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Common.Commons;
 using DataAccess.Abstracts.Interfaces.RepositoryBase;
 
+using Models.DatabaseModels.DatabaseEntities.EntityBase;
+
 #endregion
 
 namespace DataAccess.Concretes.Classes.RepositoryBase
@@ -38,10 +40,7 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
         /// hamsi
         /// </summary>
         /// <returns></returns>
-        IQueryable<T> IRepositorySelectable<T>.GetAllItems()
-        {
-            return this.DbSet.AsQueryable();
-        }
+        IQueryable<T> IRepositorySelectable<T>.GetAllItems() => this.DbSet.AsQueryable();
 
         IQueryable<T> IRepositorySelectable<T>.GetAllItems(Expression<Func<T, bool>> predicate)
         {
@@ -49,15 +48,19 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
                              .AsQueryable();
         }
 
-        T IRepositorySelectable<T>.GetItem(object id)
-        {
-            T getItemById = this.DbSet.Find(keyValues: id);
-            return getItemById ?? null;
-        }
+        T IRepositorySelectable<T>.GetItem(object id) =>
+            Tools.TryCatch<T>(function: () =>
+            {
+                T getItemById = this.DbSet.Find(keyValues: id);
+                return getItemById ?? null;
+            });
 
         T IRepositorySelectable<T>.GetItem(Expression<Func<T, bool>> predicate)
         {
-            return this.DbSet.SingleOrDefault(predicate: predicate);
+            return Tools.TryCatch<T>(function: () =>
+            {
+                return this.DbSet.SingleOrDefault(predicate: predicate);
+            });
         }
         #endregion Select Functions
 
@@ -71,39 +74,58 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
         #endregion Insert Functions
 
         #region Update Functions
-        T IRepositoryUpdatable<T>.UpdateItem(T updateItem)
-        {
-            var updatedRecord = this.DbSet.Attach(entity: updateItem);
-            updatedRecord.State = EntityState.Modified;
-            return updatedRecord.Entity;
-        }
+        T IRepositoryUpdatable<T>.UpdateItem(T updateItem) =>
+            Tools.TryCatch<T>(function: () =>
+            {
+                return this.BasicUpdate(item: updateItem);
+            });
         #endregion Update Functions
 
         #region Delete Functions
-        bool IRepositoryDeletable<T>.TemporaryDelete(object id)
+        T IRepositoryDeletable<T>.TemporaryDelete(T deleteEntity)
         {
-
-            //Tools.TryCatch<bool>(function: hamsi(id: id));
-            return false;
+            Func<T> function = () =>
+            {
+                return this.BasicUpdate(item: deleteEntity);
+            };
+            return function.TryCatch();
         }
 
-        bool IRepositoryDeletable<T>.PermanentDelete(object id)
-        {
+        //bool IRepositoryDeletable<T>.PermanentDelete<T1>(object id) =>
+        bool IRepositoryDeletable<T>.PermanentDelete(object id) =>
+             Tools.TryCatch<bool>(function: () =>
+             {
+                 bool result = default(bool);
 
-            return Tools.TryCatch<bool>(function: () => {
-
-                bool result = default(bool);
-
-                T getRecord = this.DbSet.Find(keyValues: id);
-                if (getRecord != null)
-                {
-                    var deletedRecord = this.DbSet.Attach(entity: getRecord);
-                    deletedRecord.State = EntityState.Deleted;
-                    result = this.DbContext.SaveChanges() > 0 ? true : false;
-                }
-                return result;
-            });
-        }
+                 T getRecord = this.DbSet.Find(keyValues: id);
+                 if (getRecord != null)
+                 {
+                     var deletedRecord = this.DbSet.Attach(entity: getRecord);
+                     deletedRecord.State = EntityState.Deleted;
+                     result = this.DbContext.SaveChanges() > 0 ? true : false;
+                 }
+                 return result;
+             }, catchAndDo: (Exception exception) =>
+             {
+                 return false;
+             });
         #endregion Delete Functions
+
+        #region Private Functions
+
+        /// <summary>
+        /// Verilen T tipindeki itemi guncellenecek eleman olarak Database'ye Attach eden fonksiyon
+        /// TemporaryDelete ve Update fonksiyonlarinda ayni govde kullanilacak oldugu icin tek sefer yazip N kere kullanmak amaciyla yazildi
+        /// </summary>
+        /// <param name="item">Guncellenmek istenilen class'a ait bilgiler</param>
+        /// <returns></returns>
+        T BasicUpdate(T item)
+        {
+            var updatedRecord = this.DbSet.Attach(entity: item);
+            updatedRecord.State = EntityState.Modified;
+            return updatedRecord.Entity;
+        }
+
+        #endregion
     }
 }

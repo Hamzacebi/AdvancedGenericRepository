@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Models.DatabaseModels.DatabaseEntities
 {
-    public partial class Orders
+    using EntityBase;
+
+    public partial class Orders : IBaseForCreation, IBaseForUpdate, IBaseForDelete
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
