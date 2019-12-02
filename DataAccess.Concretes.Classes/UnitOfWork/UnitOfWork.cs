@@ -177,6 +177,11 @@ namespace DataAccess.Concretes.Classes.UnitOfWork
 
         #region Transaction Functions
 
+        TransactionScope IUnitOfWork.BeginTransaction()
+        {
+            return new TransactionScope();
+        }
+
         #endregion
 
         #region Private Functions

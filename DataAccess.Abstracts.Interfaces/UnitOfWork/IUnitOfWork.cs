@@ -34,11 +34,18 @@ namespace DataAccess.Abstracts.Interfaces.UnitOfWork
 
         #region Transaction Functions
 
-        //TransactionScope BeginTransaction();
+        /// <summary>
+        /// ACID prensiplerine uyabilmek ve System.IO (Dosya okuma-yazma) islemlerinin hepsinde tutarlilik saglayabilmek amaciyla 
+        /// Transaction seviyesinde Begin Transaction baslatan fonksiyon.
+        /// <para>NOT : RollBack ve Dispose komutlarinin dogru yonetilmesi icin Try-Catch icerisinde kullanin!</para>
+        /// </summary>
+        /// <returns></returns>
+        TransactionScope BeginTransaction();
 
-        //void CommitTransaction();
+        //void CommitTransaction(TransactionScope willBeCommitTransaction);
 
-        //void RollBackTransaction();
+        //void DisposeTransaction(TransactionScope willBeDisposeTransaction);
+
 
         #endregion
 

@@ -26,7 +26,7 @@ namespace DataAccess.Abstracts.Interfaces.RepositoryBase
         /// Verilen Id degerine gore tek bir kayidi listeler
         /// </summary>
         /// <param name="id">Listelenmek istenilen kayita ait Id bilgisi</param>
-        /// <returns></returns>
+        /// <returns>Id sonucunda deger var ise T tipinde entity, deger yok ise Null deger donecektir</returns>
         T GetItem(object id);
 
         /// <summary>

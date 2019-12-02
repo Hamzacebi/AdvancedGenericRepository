@@ -36,10 +36,7 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
         #endregion Constructors
 
         #region Select Functions
-        /// <summary>
-        /// hamsi
-        /// </summary>
-        /// <returns></returns>
+       
         IQueryable<T> IRepositorySelectable<T>.GetAllItems() => this.DbSet.AsQueryable();
 
         IQueryable<T> IRepositorySelectable<T>.GetAllItems(Expression<Func<T, bool>> predicate)
@@ -51,8 +48,8 @@ namespace DataAccess.Concretes.Classes.RepositoryBase
         T IRepositorySelectable<T>.GetItem(object id) =>
             Tools.TryCatch<T>(function: () =>
             {
-                T getItemById = this.DbSet.Find(keyValues: id);
-                return getItemById ?? null;
+                //Find fonksiyonu eger bir deger bulamazsa SingleOrDefault degeri gibi null donecektir
+                return this.DbSet.Find(keyValues: id);
             });
 
         T IRepositorySelectable<T>.GetItem(Expression<Func<T, bool>> predicate)
