@@ -21,9 +21,7 @@ namespace Test.Test
 
         static void Main(string[] args)
         {
-            OrderDBContext currentDbContext = new OrderDBContext();
-
-            UserTransactions userTransactions = new UserTransactions(dbContext: currentDbContext);
+            UserTransactions userTransactions = new UserTransactions(dbContext: new OrderDBContext());
 
             userTransactions.CreateUser(new Users
             {
