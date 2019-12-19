@@ -1,7 +1,7 @@
 
 ####	 NOT : Lütfen projeyi ilk açtığınızda Package Manager üzerinden "dotnet restore" komutunu çalıştırın
 
-Bu projede, Generic Repository Design Patternde olan bir sorunsalı ve Service Oriented Architecture yaklaşımı, best practice yazımı göstermek amaçlanmıştır.
+Bu projede, Generic Repository Design Patternde olan bir sorunsalı best practice yazımı göstermek amaçlanmıştır.
 
 Bilindiği üzere Generic Repository, kendisine verilen herhangi bir DatabaseContext class'i içerisinde bulunan tüm DbSet'ler yani Database içindeki tüm tablolar için bir sefer yazılmış olan ve  "BASE" olarak tanımlanmış - belirlenmiş olan CRUD (Create - Read - Update - Delete) fonksiyonlarına ulaşmaya imkân sağlayan, bunları virtual olarak tanımlanmışsa ihtiyaçlar doğrultusunda Database içinde ki herhangi bir tablo için override ederek özelleştirebileceğimiz bir örüntü - yaklaşım biçimidir.
 
