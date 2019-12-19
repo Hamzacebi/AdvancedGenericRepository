@@ -9,8 +9,8 @@ Bilindiği üzere Generic Repository, kendisine verilen herhangi bir DatabaseCon
 		
 Generic Repository'in temelinde yatan her tablo Base olarak belirlenmiş olan tüm fonksiyonlara ulaşabilir durumunu barındırmaktadır fakat, bazı tablolar sadece Insert fonksiyonlarına sahip olması gerekirken, Base olarak belirlenmiş olan class'tan miras aldığı için ihtiyacı olmasa bile Update ve Delete fonksiyonlarına da otomatik olarak sahip olmuş olacaktır. Yani;
 
-		NOT : Kodlar .Net Core EntityFrameworkCore'a göre yazılmıştır.
-		NOT : Fonksiyonlar temsili olarak yazilmistir. Tam anlamiyla calismayabilir.
+####	NOT : Kodlar .Net Core EntityFrameworkCore'a göre yazılmıştır.
+####	NOT : Fonksiyonlar temsili olarak yazilmistir. Tam anlamiyla calismayabilir.
 
 
 
